@@ -11,12 +11,14 @@ import com.services.SqlServerService;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
 import sample.Session;
 
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 public class Index implements Initializable {
@@ -45,8 +47,13 @@ public class Index implements Initializable {
                 Connection connection = sqlServerConnection.getConnection();
                 SqlServerService sqlServerService = new SqlServerService(connection);
                 List<String> listPrimaryKeys = sqlServerService.getPrimaryKey(((SqlServerSource) source).getTableName());
-                listPrimaryKeys.forEach(key -> {
-                    System.out.println(key);
+
+                List<Map<String, String>> listTableChanges = sqlServerService.getTableChange(((SqlServerSource) source).getTableName(), listPrimaryKeys);
+                listTableChanges.forEach(change-> {
+                    for (Map.Entry<String, String> entry : change.entrySet()) {
+                        System.out.println("Key : " + entry.getKey() + " Value : " + entry.getValue());
+                    }
+                    System.out.println("--");
                 });
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
@@ -57,5 +64,11 @@ public class Index implements Initializable {
 
         /*ExecuteDataflow executeDataflow = new ExecuteDataflow();
         executeDataflow.execute();*/
+    }
+
+    @FXML
+    private void close() {
+        Stage stage = (Stage) lblSourceName.getScene().getWindow();
+        stage.close();
     }
 }

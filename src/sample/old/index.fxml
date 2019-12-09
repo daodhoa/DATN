@@ -9,7 +9,7 @@
    <top>
       <Pane prefHeight="54.0" prefWidth="600.0" style="-fx-border-color: black;" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="22.0" layoutY="13.0" prefHeight="29.0" prefWidth="73.0" text="Name">
+            <Label layoutX="22.0" layoutY="13.0" prefHeight="29.0" prefWidth="114.0" text="OLD DATAFLOW">
                <font>
                   <Font size="14.0" />
                </font>
@@ -21,7 +21,7 @@
       <Pane prefHeight="64.0" prefWidth="782.0" BorderPane.alignment="CENTER">
          <children>
             <Button layoutX="607.0" layoutY="20.0" mnemonicParsing="false" onAction="#execute" text="Execute" />
-            <Button layoutX="683.0" layoutY="20.0" mnemonicParsing="false" text="Close" />
+            <Button layoutX="683.0" layoutY="20.0" mnemonicParsing="false" onAction="#close" text="Close" />
          </children>
       </Pane>
    </bottom>

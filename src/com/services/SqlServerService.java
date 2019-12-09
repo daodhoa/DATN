@@ -89,9 +89,7 @@ public class SqlServerService extends SqlService{
             try {
                 columnLength = (int) length;
             } catch (Exception e) {
-                columnLength = 100
-                ;
-                e.printStackTrace();
+                columnLength = 100;
                 System.out.println("Error when cast to int");
             }
             column.setLength(columnLength);
@@ -137,4 +135,25 @@ public class SqlServerService extends SqlService{
         return listKeys;
     }
 
+    public List<Map<String, String>> getTableChange(String tableName, List<String> listPrimaryKeys) throws SQLException {
+        List<Map<String, String>> listTableChanges = new ArrayList<>();
+        String columnSelect = "";
+        for (int i = 0; i < listPrimaryKeys.size(); i++) {
+            columnSelect += listPrimaryKeys.get(i) + ", ";
+        }
+        columnSelect = columnSelect.substring(0, columnSelect.length() -2);
+        String[] tableSchemaTableName = tableName.split("\\.");
+        String sqlString = "SELECT SYS_CHANGE_OPERATION, " + columnSelect +" FROM CHANGETABLE (CHANGES "+ tableName +",0) as CT";
+        PreparedStatement preparedStatement = this.connection.prepareStatement(sqlString);
+        ResultSet rs = preparedStatement.executeQuery();
+        while (rs.next()) {
+            Map<String, String> mapOneRow = new HashMap<>();
+            mapOneRow.put("SYS_CHANGE_OPERATION", rs.getString(1));
+            for (int j=0; j < listPrimaryKeys.size(); j++) {
+                mapOneRow.put(listPrimaryKeys.get(j), rs.getString(listPrimaryKeys.get(j)));
+            }
+            listTableChanges.add(mapOneRow);
+        }
+        return listTableChanges;
+    }
 }
