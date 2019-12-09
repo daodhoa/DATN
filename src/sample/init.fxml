@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Init">
+   <children>
+      <Button layoutX="108.0" layoutY="153.0" mnemonicParsing="false" onAction="#openSaved" prefHeight="70.0" prefWidth="122.0" text="Open" />
+      <Button layoutX="327.0" layoutY="153.0" mnemonicParsing="false" onAction="#openNewDataFlow" prefHeight="70.0" prefWidth="122.0" text="New Dataflow" />
+      <Pane layoutY="330.0" prefHeight="70.0" prefWidth="600.0">
+         <children>
+            <Label alignment="CENTER" layoutX="113.0" layoutY="15.0" prefHeight="29.0" prefWidth="382.0" text="Welcome to ETL Stack">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

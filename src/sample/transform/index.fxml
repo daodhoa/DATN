@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.transform.Index">
+   <top>
+      <Pane prefHeight="37.0" prefWidth="800.0" style="-fx-border-style: solid;" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="14.0" layoutY="6.0" prefHeight="23.0" prefWidth="114.0" text="Transformation" />
+         </children>
+      </Pane>
+   </top>
+   <left>
+      <Pane prefHeight="413.0" prefWidth="220.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" layoutX="44.0" layoutY="14.0" prefHeight="29.0" prefWidth="133.0" text="List Columns">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <ListView fx:id="listView" layoutX="9.0" layoutY="55.0" prefHeight="238.0" prefWidth="212.0" />
+         </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+      </Pane>
+   </left>
+   <bottom>
+      <Pane prefHeight="75.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button layoutX="553.0" layoutY="18.0" mnemonicParsing="false" onAction="#saveAndClose" prefHeight="32.0" prefWidth="139.0" text="Save and Close" />
+            <Button layoutX="720.0" layoutY="18.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="66.0" text="Cancel" />
+         </children>
+      </Pane>
+   </bottom>
+   <center>
+      <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Pane layoutX="62.0" layoutY="29.0">
+               <children>
+                  <TextField fx:id="txtSize" layoutX="288.0" layoutY="70.0" prefHeight="25.0" prefWidth="42.0" />
+                  <Label layoutX="255.0" layoutY="70.0" prefHeight="26.0" prefWidth="33.0" text="Size:" />
+                  <Label layoutY="69.0" prefHeight="26.0" prefWidth="58.0" text="Datatype:" />
+                  <Button layoutX="250.0" layoutY="233.0" mnemonicParsing="false" onAction="#reset" text="Reset" />
+                  <Label layoutY="113.0" prefHeight="26.0" prefWidth="61.0" text="Expression:" />
+                  <Label layoutX="73.0" prefHeight="17.0" prefWidth="143.0" text="New Column" />
+                  <TextField fx:id="txtName" layoutX="73.0" layoutY="28.0" prefHeight="25.0" prefWidth="172.0" />
+                  <Label layoutY="28.0" prefHeight="26.0" prefWidth="42.0" text="Name:" />
+                  <TextArea fx:id="txtExpression" layoutX="73.0" layoutY="113.0" prefHeight="105.0" prefWidth="256.0">
+                     <font>
+                        <Font size="15.0" />
+                     </font></TextArea>
+                  <Hyperlink layoutX="341.0" layoutY="113.0" onAction="#showExpressionTutorial" prefHeight="23.0" prefWidth="115.0" text="Build-in Expressions" />
+                  <ComboBox fx:id="cbDataType" layoutX="73.0" layoutY="70.0" prefHeight="25.0" prefWidth="171.0" />
+                  <Button layoutX="190.0" layoutY="233.0" mnemonicParsing="false" onAction="#saveColumn" text="Save" />
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+   </center>
+</BorderPane>

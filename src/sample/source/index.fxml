@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.source.Index">
+   <children>
+      <TabPane layoutX="-1.0" layoutY="-2.0" prefHeight="359.0" prefWidth="599.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="43.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="-2.0">
+        <tabs>
+          <Tab text="Excel">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="72.0" layoutY="68.0" prefHeight="30.0" prefWidth="41.0" text="File:">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="txtFilePath" editable="false" layoutX="160.0" layoutY="69.0" prefHeight="29.0" prefWidth="287.0">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </TextField>
+                        <Button layoutX="470.0" layoutY="71.0" mnemonicParsing="false" onAction="#selectExcelFile" text="Browse ..." />
+                        <ComboBox fx:id="cbListSheetName" layoutX="161.0" layoutY="153.0" onAction="#showButtonPane" prefHeight="33.0" prefWidth="285.0" />
+                        <Label layoutX="72.0" layoutY="158.0" prefHeight="30.0" prefWidth="84.0" text="Select sheet:">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <CheckBox fx:id="checkBox" layoutX="160.0" layoutY="204.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="286.0" selected="true" text="First row as column name" />
+                        <Pane fx:id="buttonPane" layoutX="364.0" layoutY="279.0" prefHeight="43.0" prefWidth="200.0">
+                           <children>
+                              <Button layoutX="14.0" layoutY="9.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="76.0" text="Preview" />
+                              <Button layoutX="100.0" layoutY="9.0" mnemonicParsing="false" onAction="#showExcelColumnConfig" prefHeight="25.0" prefWidth="76.0" text="Next" />
+                           </children>
+                        </Pane>
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Sql Server">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Pane layoutX="44.0" layoutY="14.0">
+                           <children>
+                              <Pane fx:id="selectTablePane" layoutX="174.0" layoutY="209.0">
+                                 <children>
+                                    <Button layoutX="170.0" mnemonicParsing="false" onAction="#ssShowTableNameSelection" text="Select table" />
+                                    <ComboBox fx:id="ssTableCb" prefWidth="150.0" />
+                                 </children>
+                              </Pane>
+                              <Pane layoutX="3.0" prefHeight="47.0" prefWidth="509.0">
+                                 <children>
+                                    <Label layoutX="22.0" layoutY="9.0" prefHeight="30.0" prefWidth="66.0" text="Hostname" />
+                                    <TextField fx:id="ssHostnameTxt" layoutX="106.0" layoutY="11.0" prefHeight="25.0" prefWidth="315.0" />
+                                 </children>
+                              </Pane>
+                              <Pane layoutY="47.0" prefHeight="47.0" prefWidth="509.0">
+                                 <children>
+                                    <Label layoutX="22.0" layoutY="9.0" prefHeight="30.0" prefWidth="66.0" text="Username" />
+                                    <TextField fx:id="ssUsernameTxt" layoutX="107.0" layoutY="11.0" prefHeight="25.0" prefWidth="314.0" />
+                                 </children>
+                              </Pane>
+                              <Pane layoutY="101.0" prefHeight="47.0" prefWidth="509.0">
+                                 <children>
+                                    <Label layoutX="22.0" layoutY="9.0" prefHeight="30.0" prefWidth="66.0" text="Password" />
+                                    <PasswordField fx:id="ssPasswordTxt" layoutX="106.0" layoutY="11.0" prefHeight="25.0" prefWidth="315.0" />
+                                 </children>
+                              </Pane>
+                              <Pane layoutY="148.0" prefHeight="47.0" prefWidth="509.0">
+                                 <children>
+                                    <Label layoutX="22.0" layoutY="9.0" prefHeight="30.0" prefWidth="66.0" text="Database" />
+                                    <TextField fx:id="ssDatabaseTxt" layoutX="106.0" layoutY="11.0" prefHeight="25.0" prefWidth="315.0" />
+                                 </children>
+                              </Pane>
+                           </children>
+                        </Pane>
+                        <Pane layoutX="378.0" layoutY="273.0" prefHeight="43.0" prefWidth="200.0">
+                           <children>
+                              <Button layoutX="14.0" layoutY="9.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="76.0" text="Preview" />
+                              <Button layoutX="100.0" layoutY="9.0" mnemonicParsing="false" onAction="#ssHandleOk" prefHeight="25.0" prefWidth="76.0" text="OK" />
+                           </children>
+                        </Pane>
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+            <Tab text="MySql">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Pane layoutX="44.0" layoutY="32.0">
+                           <children>
+                              <Button layoutX="344.0" layoutY="209.0" mnemonicParsing="false" onAction="#myShowTableSelected" text="Select table" />
+                              <Pane layoutX="3.0" prefHeight="47.0" prefWidth="509.0">
+                                 <children>
+                                    <Label layoutX="22.0" layoutY="9.0" prefHeight="30.0" prefWidth="66.0" text="Hostname" />
+                                    <TextField fx:id="myHostnameTxt" layoutX="106.0" layoutY="11.0" prefHeight="25.0" prefWidth="315.0" text="localhost" />
+                                 </children>
+                              </Pane>
+                              <Pane layoutY="47.0" prefHeight="47.0" prefWidth="509.0">
+                                 <children>
+                                    <Label layoutX="22.0" layoutY="9.0" prefHeight="30.0" prefWidth="66.0" text="Username" />
+                                    <TextField fx:id="myUsernameTxt" layoutX="110.0" layoutY="11.0" prefHeight="25.0" prefWidth="311.0" text="root" />
+                                 </children>
+                              </Pane>
+                              <Pane layoutY="101.0" prefHeight="47.0" prefWidth="509.0">
+                                 <children>
+                                    <Label layoutX="22.0" layoutY="9.0" prefHeight="30.0" prefWidth="66.0" text="Password" />
+                                    <PasswordField fx:id="myPasswordTxt" layoutX="106.0" layoutY="11.0" prefHeight="25.0" prefWidth="315.0" />
+                                 </children>
+                              </Pane>
+                              <Pane layoutY="148.0" prefHeight="47.0" prefWidth="509.0">
+                                 <children>
+                                    <Label layoutX="22.0" layoutY="9.0" prefHeight="30.0" prefWidth="66.0" text="Database" />
+                                    <TextField fx:id="myDatabaseTxt" layoutX="106.0" layoutY="11.0" prefHeight="25.0" prefWidth="315.0" />
+                                 </children>
+                              </Pane>
+                              <ComboBox fx:id="myTableCb" layoutX="191.0" layoutY="209.0" prefWidth="150.0" />
+                           </children>
+                        </Pane>
+                        <Pane layoutX="385.0" layoutY="287.0" prefHeight="43.0" prefWidth="200.0">
+                           <children>
+                              <Button layoutX="14.0" layoutY="9.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="76.0" text="Preview" />
+                              <Button layoutX="100.0" layoutY="9.0" mnemonicParsing="false" onAction="#myHandleOk" prefHeight="25.0" prefWidth="76.0" text="OK" />
+                           </children>
+                        </Pane>
+                     </children></AnchorPane>
+              </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+      <Label fx:id="hideLabel" layoutX="502.0" layoutY="369.0" opacity="0.0" text="Label" />
+   </children>
+</AnchorPane>

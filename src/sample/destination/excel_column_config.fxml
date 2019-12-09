@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="245.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.destination.ExcelColumnConfig">
+    <children>
+        <ListView fx:id="listView" layoutX="42.0" layoutY="39.0" prefHeight="240.0" prefWidth="161.0" />
+      <Button layoutX="87.0" layoutY="286.0" mnemonicParsing="false" onAction="#handleRemove" text="Remove" />
+      <Button layoutX="107.0" layoutY="361.0" mnemonicParsing="false" onAction="#closeStage" text="Cancel" />
+      <Button layoutX="170.0" layoutY="361.0" mnemonicParsing="false" onAction="#handleOk" text="OK" />
+    </children>
+</AnchorPane>

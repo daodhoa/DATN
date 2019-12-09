@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="559.0" prefWidth="892.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+   <top>
+      <Pane prefHeight="43.0" prefWidth="600.0" BorderPane.alignment="CENTER" />
+   </top>
+   <center>
+      <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Pane layoutX="55.0" layoutY="51.0" prefHeight="160.0" prefWidth="783.0">
+               <children>
+                  <Button layoutX="301.0" layoutY="3.0" mnemonicParsing="false" onAction="#openTransform" prefHeight="131.0" prefWidth="171.0" text="Transform">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#openExtractSource" prefHeight="137.0" prefWidth="170.0" text="Extract Source">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="610.0" layoutY="5.0" mnemonicParsing="false" onAction="#openDestination" prefHeight="133.0" prefWidth="173.0" text="Load to Destination">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Button>
+               </children>
+            </Pane>
+            <Button layoutX="718.0" layoutY="301.0" mnemonicParsing="false" onAction="#execute" prefHeight="40.0" prefWidth="77.0" text="Execute" />
+            <Label layoutX="60.0" layoutY="164.0" prefHeight="26.0" prefWidth="168.0" />
+            <Label layoutX="362.0" layoutY="168.0" prefHeight="26.0" prefWidth="168.0" />
+            <Label layoutX="673.0" layoutY="168.0" prefHeight="26.0" prefWidth="168.0" />
+         </children>
+      </Pane>
+   </center>
+   <bottom>
+      <Pane prefHeight="154.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+         <children>
+            <TextArea layoutX="14.0" layoutY="14.0" prefHeight="129.0" prefWidth="864.0" />
+         </children>
+      </Pane>
+   </bottom>
+</BorderPane>

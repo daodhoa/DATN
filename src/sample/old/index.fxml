@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="430.0" prefWidth="782.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.old.Index">
+   <top>
+      <Pane prefHeight="54.0" prefWidth="600.0" style="-fx-border-color: black;" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="22.0" layoutY="13.0" prefHeight="29.0" prefWidth="73.0" text="Name">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+   </top>
+   <bottom>
+      <Pane prefHeight="64.0" prefWidth="782.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button layoutX="607.0" layoutY="20.0" mnemonicParsing="false" onAction="#execute" text="Execute" />
+            <Button layoutX="683.0" layoutY="20.0" mnemonicParsing="false" text="Close" />
+         </children>
+      </Pane>
+   </bottom>
+   <center>
+      <Pane prefHeight="312.0" prefWidth="588.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="14.0" layoutY="28.0" prefHeight="46.0" prefWidth="130.0" text="Source" underline="true">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblSourceName" layoutX="18.0" layoutY="68.0" prefHeight="73.0" prefWidth="705.0" text="Sql server">
+               <font>
+                  <Font size="14.0" />
+               </font></Label>
+            <Label fx:id="lblDestName" layoutX="20.0" layoutY="194.0" prefHeight="94.0" prefWidth="706.0" text="Excel">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="11.0" layoutY="156.0" prefHeight="46.0" prefWidth="137.0" text="Destination" underline="true">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+   </center>
+</BorderPane>

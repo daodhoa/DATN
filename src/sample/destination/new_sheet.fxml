@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="137.0" prefWidth="255.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.destination.NewSheet">
+   <children>
+      <Label layoutX="24.0" layoutY="14.0" prefHeight="27.0" prefWidth="100.0" text="Sheet Name:">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtSheetName" layoutX="24.0" layoutY="53.0" prefHeight="29.0" prefWidth="212.0">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </TextField>
+      <Button layoutX="184.0" layoutY="98.0" mnemonicParsing="false" onAction="#save" text="Save" />
+      <Button layoutX="104.0" layoutY="98.0" mnemonicParsing="false" onAction="#closeStage" text="Cancel" />
+   </children>
+</AnchorPane>

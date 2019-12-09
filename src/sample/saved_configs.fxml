@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane prefHeight="301.0" prefWidth="177.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.SavedConfigs">
+   <children>
+      <ListView fx:id="listView" layoutX="11.0" layoutY="17.0" prefHeight="239.0" prefWidth="156.0" />
+      <Button layoutX="73.0" layoutY="262.0" mnemonicParsing="false" onAction="#handleOk" text="OK" />
+      <Button layoutX="115.0" layoutY="262.0" mnemonicParsing="false" onAction="#handleCancel" text="Cancel" />
+   </children>
+</AnchorPane>

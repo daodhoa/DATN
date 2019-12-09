@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="191.0" prefWidth="364.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.SaveConfirm">
+   <children>
+      <TextField fx:id="txtName" layoutX="91.0" layoutY="46.0" prefHeight="40.0" prefWidth="156.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <Label layoutX="35.0" layoutY="54.0" prefHeight="25.0" prefWidth="56.0" text="Name: ">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Button layoutX="195.0" layoutY="142.0" mnemonicParsing="false" onAction="#save" text="Save" />
+      <Button layoutX="261.0" layoutY="142.0" mnemonicParsing="false" onAction="#cancel" text="Cancel" />
+      <Label layoutX="259.0" layoutY="46.0" prefHeight="40.0" prefWidth="56.0" text=".xml">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
