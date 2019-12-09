@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<dataFlow>
+    <connectionManagers>
+        <mySqlManagerDestination refId="connectionManagers[localhost.etl]" creationName="MYSQL" objectName="localhost.etl">
+            <connection database="etl" hostname="localhost" password="123456" username="root">
+                <tableName>newadmin</tableName>
+            </connection>
+        </mySqlManagerDestination>
+        <sqlServerManager refId="connectionManagers[DESKTOP-IC03QCJ\DAODHOA.BookOnline]" creationName="SQL_SERVER" objectName="DESKTOP-IC03QCJ\DAODHOA.BookOnline">
+            <connection database="BookOnline" hostname="DESKTOP-IC03QCJ\DAODHOA" password="123456" username="sa"/>
+        </sqlServerManager>
+    </connectionManagers>
+    <executables>
+        <pineline>
+            <components>
+                <derivedColumn>
+                    <inputColumns>
+                        <inputColumn id="DataFlow.SqlServerSource.Outputs[SqlServerSourceOutput].Columns[username]">
+                            <dataType>STRING</dataType>
+                            <length>50</length>
+                            <name>username</name>
+                        </inputColumn>
+                    </inputColumns>
+                    <outputColumns>
+                        <outputColumn id="DataFlow.DerivedColumn.Outputs[DerivedColumnOutput].Columns[email]" linearId="DataFlow.SqlServerSource.Outputs[SqlServerSourceOutput].Columns[username]">
+                            <dataType>STRING</dataType>
+                            <expression>$concat([username], "@gmail.com")</expression>
+                            <length>100</length>
+                            <name>email</name>
+                        </outputColumn>
+                    </outputColumns>
+                </derivedColumn>
+                <mysqlDestination>
+                    <connectionManagerRefId>connectionManagers[localhost.etl]</connectionManagerRefId>
+                    <inputColumns linearId="DataFlow.SqlServerSource.Outputs[SqlServerSourceOutput].Columns[password]">
+                        <dataType>STRING</dataType>
+                        <length>100</length>
+                        <name>password</name>
+                    </inputColumns>
+                    <inputColumns linearId="DataFlow.SqlServerSource.Outputs[SqlServerSourceOutput].Columns[aname]">
+                        <dataType>STRING</dataType>
+                        <length>100</length>
+                        <name>aname</name>
+                    </inputColumns>
+                    <inputColumns linearId="DataFlow.SqlServerSource.Outputs[SqlServerSourceOutput].Columns[aid]">
+                        <dataType>INT</dataType>
+                        <length>100</length>
+                        <name>aid</name>
+                    </inputColumns>
+                    <inputColumns linearId="DataFlow.DerivedColumn.Outputs[DerivedColumnOutput].Columns[email]">
+                        <dataType>STRING</dataType>
+                        <length>100</length>
+                        <name>email</name>
+                    </inputColumns>
+                    <inputColumns linearId="DataFlow.SqlServerSource.Outputs[SqlServerSourceOutput].Columns[username]">
+                        <dataType>STRING</dataType>
+                        <length>100</length>
+                        <name>username</name>
+                    </inputColumns>
+                    <tableName>newadmin</tableName>
+                </mysqlDestination>
+                <sqlServerSource>
+                    <connectionManagerRefId>connectionManagers[DESKTOP-IC03QCJ\DAODHOA.BookOnline]</connectionManagerRefId>
+                    <outputs>
+                        <outputColumn id="DataFlow.SqlServerSource.Outputs[SqlServerSourceOutput].Columns[aid]">
+                            <dataType>INT</dataType>
+                            <length>100</length>
+                            <name>aid</name>
+                        </outputColumn>
+                        <outputColumn id="DataFlow.SqlServerSource.Outputs[SqlServerSourceOutput].Columns[username]">
+                            <dataType>STRING</dataType>
+                            <length>50</length>
+                            <name>username</name>
+                        </outputColumn>
+                        <outputColumn id="DataFlow.SqlServerSource.Outputs[SqlServerSourceOutput].Columns[password]">
+                            <dataType>STRING</dataType>
+                            <length>50</length>
+                            <name>password</name>
+                        </outputColumn>
+                        <outputColumn id="DataFlow.SqlServerSource.Outputs[SqlServerSourceOutput].Columns[aname]">
+                            <dataType>STRING</dataType>
+                            <length>100</length>
+                            <name>aname</name>
+                        </outputColumn>
+                    </outputs>
+                    <tableName>dbo.admin</tableName>
+                </sqlServerSource>
+            </components>
+        </pineline>
+    </executables>
+</dataFlow>

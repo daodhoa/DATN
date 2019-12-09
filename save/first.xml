@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<dataFlow>
+    <connectionManagers>
+        <excelManagerDestination refId="connectionManagers[EXCEL]" creationName="EXCEL" objectName="EXCEL">
+            <connection path="C:\Users\Dao D. Hoa\Desktop\Book1.xlsx" isFirstRow="false">
+                <sheetIndex>0</sheetIndex>
+            </connection>
+        </excelManagerDestination>
+        <sqlServerManager refId="connectionManagers[DESKTOP-IC03QCJ\DAODHOA.BookOnline]" creationName="SQL_SERVER" objectName="DESKTOP-IC03QCJ\DAODHOA.BookOnline">
+            <connection database="BookOnline" hostname="DESKTOP-IC03QCJ\DAODHOA" password="123456" username="sa"/>
+        </sqlServerManager>
+    </connectionManagers>
+    <executables>
+        <pineline>
+            <components>
+                <excelDestination>
+                    <connectionManagerRefId>connectionManagers[EXCEL]</connectionManagerRefId>
+                    <inputColumns id="DataFlow.SqlServerSource.Outputs[SqlServerSourceOutput].Columns[admin_id]">
+                        <dataType>INT</dataType>
+                        <length>100</length>
+                        <name>admin_id</name>
+                    </inputColumns>
+                    <inputColumns id="DataFlow.SqlServerSource.Outputs[SqlServerSourceOutput].Columns[role_id]">
+                        <dataType>INT</dataType>
+                        <length>100</length>
+                        <name>role_id</name>
+                    </inputColumns>
+                </excelDestination>
+                <sqlServerSource>
+                    <connectionManagerRefId>connectionManagers[DESKTOP-IC03QCJ\DAODHOA.BookOnline]</connectionManagerRefId>
+                    <outputs>
+                        <outputColumn id="DataFlow.SqlServerSource.Outputs[SqlServerSourceOutput].Columns[admin_id]">
+                            <dataType>INT</dataType>
+                            <length>100</length>
+                            <name>admin_id</name>
+                        </outputColumn>
+                        <outputColumn id="DataFlow.SqlServerSource.Outputs[SqlServerSourceOutput].Columns[role_id]">
+                            <dataType>INT</dataType>
+                            <length>100</length>
+                            <name>role_id</name>
+                        </outputColumn>
+                    </outputs>
+                    <tableName>dbo.admin_role</tableName>
+                </sqlServerSource>
+            </components>
+        </pineline>
+    </executables>
+</dataFlow>

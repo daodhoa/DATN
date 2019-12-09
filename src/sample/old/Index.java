@@ -45,9 +45,12 @@ public class Index implements Initializable {
                 Connection connection = sqlServerConnection.getConnection();
                 SqlServerService sqlServerService = new SqlServerService(connection);
                 List<String> listPrimaryKeys = sqlServerService.getPrimaryKey(((SqlServerSource) source).getTableName());
-                listPrimaryKeys.forEach(key -> {
-                    System.out.println(key);
-                });
+                String columnSelect = "";
+                for (int i = 0; i < listPrimaryKeys.size(); i++) {
+                    columnSelect += listPrimaryKeys.get(i) + ", ";
+                }
+                columnSelect = columnSelect.substring(0, columnSelect.length() -2);
+                System.out.println(columnSelect);
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             } catch (SQLException e) {

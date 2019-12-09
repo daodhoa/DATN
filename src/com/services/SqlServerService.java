@@ -137,4 +137,26 @@ public class SqlServerService extends SqlService{
         return listKeys;
     }
 
+    public List<Map<String, String>> getChangeData(String tableName, List<String> listPrimaryKeys) throws SQLException {
+        String columnSelect = "";
+        for (int i = 0; i < listPrimaryKeys.size(); i++) {
+            columnSelect += listPrimaryKeys.get(i) + ", ";
+        }
+        columnSelect = columnSelect.substring(0, columnSelect.length() -2);
+        String[] tableSchemaTableName = tableName.split("\\.");
+        String sqlString = "SELECT SYS_CHANGE_OPERATION, "+ columnSelect +" FROM CHANGETABLE (CHANGES "+ tableSchemaTableName[1] +",0) as CT";
+        PreparedStatement preparedStatement = this.connection.prepareStatement(sqlString);
+        ResultSet rs = preparedStatement.executeQuery();
+        List<Map<String, String>> listChangeData = new ArrayList<>();
+        while (rs.next()) {
+            Map<String, String> mapOneRow = new HashMap<>();
+            mapOneRow.put("SYS_CHANGE_OPERATION", rs.getString(1));
+            for (int j = 0; j < listPrimaryKeys.size(); j ++) {
+                mapOneRow.put(listPrimaryKeys.get(j), rs.getString(j+1));
+            }
+            listChangeData.add(mapOneRow);
+        }
+        return listChangeData;
+    }
+
 }
