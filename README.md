@@ -1,4 +1,3 @@
-#DATN
 git clone ...
 cd DATN
 mkdir save
