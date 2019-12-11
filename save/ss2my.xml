@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<dataFlow>
+    <connectionManagers>
+        <mySqlManagerDestination refId="connectionManagers[localhost.etl]" creationName="MYSQL" objectName="localhost.etl">
+            <connection database="etl" hostname="localhost" password="123456" username="root">
+                <tableName>admin</tableName>
+            </connection>
+        </mySqlManagerDestination>
+        <sqlServerManager refId="connectionManagers[DESKTOP-BP3T59L.TestIncrement]" creationName="SQL_SERVER" objectName="DESKTOP-BP3T59L.TestIncrement">
+            <connection database="TestIncrement" hostname="DESKTOP-BP3T59L" password="123456" username="sa"/>
+        </sqlServerManager>
+    </connectionManagers>
+    <executables>
+        <pineline>
+            <components>
+                <derivedColumn>
+                    <inputColumns>
+                        <inputColumn id="DataFlow.SqlServerSource.Outputs[SqlServerSourceOutput].Columns[firstname]">
+                            <dataType>STRING</dataType>
+                            <length>100</length>
+                            <name>firstname</name>
+                        </inputColumn>
+                        <inputColumn id="DataFlow.SqlServerSource.Outputs[SqlServerSourceOutput].Columns[lastname]">
+                            <dataType>STRING</dataType>
+                            <length>100</length>
+                            <name>lastname</name>
+                        </inputColumn>
+                    </inputColumns>
+                    <outputColumns>
+                        <outputColumn id="DataFlow.DerivedColumn.Outputs[DerivedColumnOutput].Columns[name]" linearId="DataFlow.SqlServerSource.Outputs[SqlServerSourceOutput].Columns[firstname]|DataFlow.SqlServerSource.Outputs[SqlServerSourceOutput].Columns[lastname]">
+                            <dataType>STRING</dataType>
+                            <expression>$concat([firstname], [lastname], " ")</expression>
+                            <length>100</length>
+                            <name>name</name>
+                        </outputColumn>
+                    </outputColumns>
+                </derivedColumn>
+                <mysqlDestination>
+                    <connectionManagerRefId>connectionManagers[localhost.etl]</connectionManagerRefId>
+                    <inputColumns linearId="DataFlow.SqlServerSource.Outputs[SqlServerSourceOutput].Columns[firstname]">
+                        <dataType>STRING</dataType>
+                        <length>100</length>
+                        <name>firstname</name>
+                    </inputColumns>
+                    <inputColumns linearId="DataFlow.DerivedColumn.Outputs[DerivedColumnOutput].Columns[name]">
+                        <dataType>STRING</dataType>
+                        <length>100</length>
+                        <name>name</name>
+                    </inputColumns>
+                    <inputColumns linearId="DataFlow.SqlServerSource.Outputs[SqlServerSourceOutput].Columns[id]">
+                        <dataType>INT</dataType>
+                        <length>100</length>
+                        <name>id</name>
+                    </inputColumns>
+                    <inputColumns linearId="DataFlow.SqlServerSource.Outputs[SqlServerSourceOutput].Columns[lastname]">
+                        <dataType>STRING</dataType>
+                        <length>100</length>
+                        <name>lastname</name>
+                    </inputColumns>
+                    <inputColumns linearId="DataFlow.SqlServerSource.Outputs[SqlServerSourceOutput].Columns[username]">
+                        <dataType>STRING</dataType>
+                        <length>100</length>
+                        <name>username</name>
+                    </inputColumns>
+                    <tableName>admin</tableName>
+                </mysqlDestination>
+                <sqlServerSource>
+                    <connectionManagerRefId>connectionManagers[DESKTOP-BP3T59L.TestIncrement]</connectionManagerRefId>
+                    <outputs>
+                        <outputColumn id="DataFlow.SqlServerSource.Outputs[SqlServerSourceOutput].Columns[id]">
+                            <dataType>INT</dataType>
+                            <length>100</length>
+                            <name>id</name>
+                        </outputColumn>
+                        <outputColumn id="DataFlow.SqlServerSource.Outputs[SqlServerSourceOutput].Columns[firstname]">
+                            <dataType>STRING</dataType>
+                            <length>100</length>
+                            <name>firstname</name>
+                        </outputColumn>
+                        <outputColumn id="DataFlow.SqlServerSource.Outputs[SqlServerSourceOutput].Columns[lastname]">
+                            <dataType>STRING</dataType>
+                            <length>100</length>
+                            <name>lastname</name>
+                        </outputColumn>
+                        <outputColumn id="DataFlow.SqlServerSource.Outputs[SqlServerSourceOutput].Columns[username]">
+                            <dataType>STRING</dataType>
+                            <length>200</length>
+                            <name>username</name>
+                        </outputColumn>
+                    </outputs>
+                    <tableName>dbo.admin</tableName>
+                </sqlServerSource>
+            </components>
+        </pineline>
+    </executables>
+</dataFlow>
