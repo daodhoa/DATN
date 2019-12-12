@@ -3,20 +3,26 @@ package sample.old;
 import com.connection.SqlServerConnection;
 import com.dataflow.ConnectionManager;
 import com.dataflow.DataFlow;
+import com.dataflow.components.DestinationInterface;
+import com.dataflow.components.MysqlDestination;
 import com.dataflow.components.SourceInterface;
 import com.dataflow.components.SqlServerSource;
+import com.model.Column;
 import com.model.SqlServer;
 import com.services.ExecuteDataflow;
 import com.services.SqlServerService;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
 import sample.Session;
 
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 public class Index implements Initializable {
@@ -45,20 +51,47 @@ public class Index implements Initializable {
                 Connection connection = sqlServerConnection.getConnection();
                 SqlServerService sqlServerService = new SqlServerService(connection);
                 List<String> listPrimaryKeys = sqlServerService.getPrimaryKey(((SqlServerSource) source).getTableName());
-                String columnSelect = "";
-                for (int i = 0; i < listPrimaryKeys.size(); i++) {
-                    columnSelect += listPrimaryKeys.get(i) + ", ";
-                }
-                columnSelect = columnSelect.substring(0, columnSelect.length() -2);
-                System.out.println(columnSelect);
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            } catch (SQLException e) {
+                List<Map<String, String>> listTableChanges = sqlServerService.getTableChange(((SqlServerSource) source)
+                        .getTableName(), listPrimaryKeys);
+
+                listTableChanges.forEach(change -> {
+                    for (Map.Entry<String, String> entry : change.entrySet()) {
+                        System.out.println(entry.getKey() + ": " + entry.getValue());
+                    }
+                    System.out.println("--");
+                });
+
+
+            } catch (ClassNotFoundException | SQLException e) {
                 e.printStackTrace();
             }
         }
 
         /*ExecuteDataflow executeDataflow = new ExecuteDataflow();
         executeDataflow.execute();*/
+    }
+
+    private boolean checkChangeTracking(List<String> listPrimaryKeys) {
+        DestinationInterface destinationInterface = Session.getDataFlow().getExecutables()
+                .getPineline().getComponents().getDestination();
+        List<Column> listInputColumns = destinationInterface.getInputColumns();
+        Map<String, Integer> mapLinearColumnName = new HashMap<>();
+        for (int i = 0; i < listInputColumns.size(); i ++) {
+            mapLinearColumnName.put(listInputColumns.get(i).getName(), i);
+        }
+
+        for (int i = 0; i < listPrimaryKeys.size(); i ++) {
+            if (!mapLinearColumnName.containsKey(listPrimaryKeys.get(i))) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    @FXML
+    private void close() {
+        Stage stage = (Stage) lblSourceName.getScene().getWindow();
+        stage.close();
     }
 }

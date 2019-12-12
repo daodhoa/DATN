@@ -26,7 +26,12 @@ import java.util.List;
 import java.util.Map;
 
 public class ExecuteDataflow {
-    DataFlow dataFlow = Session.getDataFlow();
+
+    public ExecuteDataflow() {
+        ExpressionHelper expressionHelper = new ExpressionHelper();
+    }
+
+    private DataFlow dataFlow = Session.getDataFlow();
     private List<Map<String, String>> getDataFormSource() {
         List<Map<String, String>> listData = new ArrayList<>();
 

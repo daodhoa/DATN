@@ -89,9 +89,7 @@ public class SqlServerService extends SqlService{
             try {
                 columnLength = (int) length;
             } catch (Exception e) {
-                columnLength = 100
-                ;
-                e.printStackTrace();
+                columnLength = 100;
                 System.out.println("Error when cast to int");
             }
             column.setLength(columnLength);
@@ -137,26 +135,34 @@ public class SqlServerService extends SqlService{
         return listKeys;
     }
 
-    public List<Map<String, String>> getChangeData(String tableName, List<String> listPrimaryKeys) throws SQLException {
-        String columnSelect = "";
-        for (int i = 0; i < listPrimaryKeys.size(); i++) {
-            columnSelect += listPrimaryKeys.get(i) + ", ";
+    public List<Map<String, String>> getTableChange(String tableName, List<String> listPrimaryKeys) throws SQLException {
+        List<Map<String, String>> listTableChanges = new ArrayList<>();
+        String onJoin = "";
+        onJoin = "CT." + listPrimaryKeys.get(0) + " = EM." + listPrimaryKeys.get(0);
+        if (listPrimaryKeys.size() == 2) {
+            onJoin += " AND "+ "CT." + listPrimaryKeys.get(1) + " = EM." + listPrimaryKeys.get(1);
         }
-        columnSelect = columnSelect.substring(0, columnSelect.length() -2);
-        String[] tableSchemaTableName = tableName.split("\\.");
-        String sqlString = "SELECT SYS_CHANGE_OPERATION, "+ columnSelect +" FROM CHANGETABLE (CHANGES "+ tableSchemaTableName[1] +",0) as CT";
-        PreparedStatement preparedStatement = this.connection.prepareStatement(sqlString);
+
+        Map<String, Integer> mapListColumnName = getListColumns(tableName);
+
+        String sql = "SELECT CT.SYS_CHANGE_VERSION, CT.SYS_CHANGE_OPERATION, EM.* " +
+                "FROM CHANGETABLE (CHANGES "+ tableName+",0) as CT JOIN "+ tableName +" EM " +
+                "ON "+ onJoin +" ORDER BY SYS_CHANGE_VERSION";
+
+        PreparedStatement preparedStatement = this.connection.prepareStatement(sql);
         ResultSet rs = preparedStatement.executeQuery();
-        List<Map<String, String>> listChangeData = new ArrayList<>();
         while (rs.next()) {
             Map<String, String> mapOneRow = new HashMap<>();
-            mapOneRow.put("SYS_CHANGE_OPERATION", rs.getString(1));
-            for (int j = 0; j < listPrimaryKeys.size(); j ++) {
-                mapOneRow.put(listPrimaryKeys.get(j), rs.getString(j+1));
-            }
-            listChangeData.add(mapOneRow);
-        }
-        return listChangeData;
-    }
+            mapOneRow.put("SYS_CHANGE_OPERATION", rs.getString("SYS_CHANGE_OPERATION"));
+            mapOneRow.put("SYS_CHANGE_VERSION", rs.getString("SYS_CHANGE_VERSION"));
 
+            for (Map.Entry<String, Integer> entry : mapListColumnName.entrySet()) {
+                mapOneRow.put(entry.getKey(), rs.getString(entry.getKey()));
+            }
+
+            listTableChanges.add(mapOneRow);
+        }
+
+        return listTableChanges;
+    }
 }
